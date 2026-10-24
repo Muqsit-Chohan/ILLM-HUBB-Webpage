@@ -3,12 +3,30 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
+import {
+  QuranIcon,
+  HadithIcon,
+  NamazIcon,
+  WuduIcon,
+  PrayerTimesIcon,
+  QiblaIcon,
+  AiChatIcon,
+  QuizIcon,
+  KidsIcon,
+  WazifaIcon,
+  NamesOfAllahIcon,
+  ZakatIcon,
+  CalendarIcon,
+  HabitIcon,
+  MasjidIcon,
+  RemindersIcon,
+} from "./ModuleIcons";
 
 const palette = [
-  { bg: "bg-terracotta", fg: "text-white" },
-  { bg: "bg-sand", fg: "text-terracotta" },
-  { bg: "bg-gold-primary", fg: "text-espresso-dark", fill: true },
-  { bg: "bg-[#3B281D]", fg: "text-white" },
+  { grad: "from-[#E08A5B] to-[#A8491F]", fg: "text-white", glow: "shadow-[0_10px_24px_-8px_rgba(168,73,31,0.55)]" },
+  { grad: "from-[#ECC77E] to-[#B9832F]", fg: "text-[#3B281D]", glow: "shadow-[0_10px_24px_-8px_rgba(185,131,47,0.5)]" },
+  { grad: "from-[#5B4234] to-[#2A1B14]", fg: "text-white", glow: "shadow-[0_10px_24px_-8px_rgba(42,27,20,0.55)]" },
+  { grad: "from-[#D4714A] to-[#6E3220]", fg: "text-white", glow: "shadow-[0_10px_24px_-8px_rgba(110,50,32,0.55)]" },
 ];
 
 const modules = [
@@ -17,99 +35,99 @@ const modules = [
     desc: "114 Surahs · 30 Parahs · Arabic + Urdu + English · Audio Recitation",
     cta: "Read Quran",
     to: "/quran",
-    icon: "menu_book",
+    icon: QuranIcon,
   },
   {
     title: "Hadith Library",
     desc: "Bukhari · Muslim · Tirmidhi · Abu Dawud · Ibn Majah · Nasai",
     cta: "Explore Hadiths",
     to: "/hadith",
-    icon: "auto_stories",
+    icon: HadithIcon,
   },
   {
     title: "Namaz Guide",
     desc: "9-step animated guide with beautiful prayer position figures",
     cta: "View Postures",
-    icon: "self_improvement",
+    icon: NamazIcon,
   },
   {
     title: "Wudu Guide",
     desc: "10-step animated water effects with Fard & Sunnah labels",
     cta: "Learn Wudu",
-    icon: "water_drop",
+    icon: WuduIcon,
   },
   {
     title: "Prayer Times",
     desc: "Live GPS · Hijri Date · Countdown to next Salah",
     cta: "Check Times",
     to: "/prayer-times",
-    icon: "schedule",
+    icon: PrayerTimesIcon,
   },
   {
     title: "Qibla Compass",
     desc: "Real-time compass pointing toward Makkah al-Mukarramah",
     cta: "Find Qibla",
-    icon: "explore",
+    icon: QiblaIcon,
   },
   {
     title: "AI Islamic Chat",
     desc: "Groq AI powered · Instant answers to all Islamic questions",
     cta: "Ask Now",
-    icon: "smart_toy",
+    icon: AiChatIcon,
   },
   {
     title: "MCQ Quiz",
     desc: "160+ questions · 8 categories · Daily AI-generated quiz",
     cta: "Take Quiz",
-    icon: "quiz",
+    icon: QuizIcon,
   },
   {
     title: "Kids Section",
     desc: "Alphabet · Surahs · Prophet stories · Duas · Islamic poems",
     cta: "Explore",
-    icon: "child_care",
+    icon: KidsIcon,
   },
   {
     title: "Wazifa Tracker",
     desc: "Daily dhikr counter · Subhanallah · Alhamdulillah · Allahu Akbar",
     cta: "Start Dhikr",
-    icon: "fingerprint",
+    icon: WazifaIcon,
   },
   {
     title: "Allah's 99 Names",
     desc: "Asma-ul-Husna · Arabic calligraphy · Meanings · Audio",
     cta: "View Names",
-    icon: "stars",
+    icon: NamesOfAllahIcon,
   },
   {
     title: "Zakat Calculator",
     desc: "Gold · Silver · Cash · Livestock · Business assets",
     cta: "Calculate Zakat",
-    icon: "calculate",
+    icon: ZakatIcon,
   },
   {
     title: "Islamic Calendar",
     desc: "Hijri calendar · Islamic events · Eid dates · Ramadan countdown",
     cta: "View Calendar",
-    icon: "calendar_month",
+    icon: CalendarIcon,
   },
   {
     title: "Habit Tracker",
     desc: "Build Islamic habits · Daily streaks · Prayer & Quran goals",
     cta: "Track Habits",
-    icon: "trending_up",
+    icon: HabitIcon,
   },
   {
     title: "Masjid Finder",
     desc: "Find nearest mosques · Prayer times · Directions",
     cta: "Find Masjid",
-    icon: "mosque",
+    icon: MasjidIcon,
   },
   {
     title: "Smart Reminders",
     desc: "Prayer alerts · Quran reminders · Islamic event notifications",
     cta: "Set Reminders",
-    icon: "notifications_active",
+    icon: RemindersIcon,
   },
 ];
 
@@ -139,20 +157,24 @@ export default function ModulesSection() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             aria-label="Previous"
             onClick={() => scrollByCards(-1)}
             className="w-11 h-11 rounded-full bg-white border border-border-warm flex items-center justify-center text-charcoal hover:bg-sand transition-colors shadow-sm"
           >
             <Icon name="arrow_back" className="text-lg" />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             aria-label="Next"
             onClick={() => scrollByCards(1)}
             className="w-11 h-11 rounded-full bg-[#3B281D] text-white flex items-center justify-center hover:bg-black transition-colors shadow-sm"
           >
             <Icon name="arrow_forward" className="text-lg" />
-          </button>
+          </motion.button>
         </div>
       </Reveal>
 
@@ -162,6 +184,7 @@ export default function ModulesSection() {
       >
         {modules.map((mod, i) => {
           const colors = palette[i % palette.length];
+          const ModIcon = mod.icon;
           return (
             <Reveal
               as="div"
@@ -170,10 +193,11 @@ export default function ModulesSection() {
               className="group shrink-0 snap-start w-60 sm:w-64 flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-border-warm hover:shadow-lg transition-all shadow-sm"
             >
               <motion.div
-                whileHover={{ scale: 1.08, rotate: 2 }}
-                className={`relative w-28 h-28 rounded-full mb-5 ${colors.bg} ${colors.fg} ring-4 ring-sand shadow-md flex items-center justify-center`}
+                whileHover={{ scale: 1.08, rotate: 3 }}
+                className={`relative w-24 h-24 rounded-full mb-5 bg-gradient-to-br ${colors.grad} ${colors.fg} ring-4 ring-sand ${colors.glow} flex items-center justify-center overflow-hidden`}
               >
-                <Icon name={mod.icon} className="text-6xl" fill={colors.fill} />
+                <span className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-white/25 blur-md" />
+                <ModIcon className="w-11 h-11 relative drop-shadow-sm" />
               </motion.div>
               <h3 className="text-lg font-bold text-charcoal mb-1.5">{mod.title}</h3>
               <p className="font-body text-xs text-[#736357] mb-5">{mod.desc}</p>

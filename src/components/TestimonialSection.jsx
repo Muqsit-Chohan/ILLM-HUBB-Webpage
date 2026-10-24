@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
+import CountUp from "./CountUp";
 
 const avatars = [
   {
@@ -31,34 +33,47 @@ export default function TestimonialSection() {
             What Our Community Says
           </h2>
         </div>
-        <a
-          className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#3B281D] hover:bg-black text-white text-xs font-semibold tracking-wide transition-all shadow-sm"
+        <motion.a
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#3B281D] hover:bg-black text-white text-xs font-semibold tracking-wide transition-colors shadow-sm"
           href="#"
         >
           Discover more
-        </a>
+        </motion.a>
       </Reveal>
 
       <Reveal
         delay={0.1}
         className="bg-white border border-border-warm rounded-3xl p-8 lg:p-12 shadow-sm relative overflow-hidden"
       >
-        <div className="absolute top-6 right-1/2 text-gold-primary hidden md:block">
+        <motion.div
+          animate={{ rotate: [0, 15, 0, -15, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-6 right-1/2 text-gold-primary hidden md:block"
+        >
           <Icon name="star" className="text-2xl" fill />
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-56 sm:w-64 h-72 sm:h-80 rounded-[140px_140px_32px_32px] overflow-hidden bg-gradient-to-br from-terracotta via-[#C86D43] to-[#9C4400] p-1 shadow-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-56 sm:w-64 h-72 sm:h-80 rounded-[140px_140px_32px_32px] overflow-hidden bg-gradient-to-br from-terracotta via-[#C86D43] to-[#9C4400] p-1 shadow-md group"
+            >
               <img
                 alt="Young man in traditional embroidered white thobe and keffiyeh"
-                className="w-full h-full object-cover rounded-[136px_136px_28px_28px]"
+                className="w-full h-full object-cover rounded-[136px_136px_28px_28px] transition-transform duration-700 group-hover:scale-110"
                 style={{ objectPosition: "35% 15%" }}
                 src="/images/portrait-testimonial-man.jpg"
               />
               <div className="absolute bottom-4 left-4 right-4 p-2 rounded-xl bg-white/95 backdrop-blur-sm text-center text-xs font-bold text-charcoal shadow-sm border border-border-warm">
                 Ayaan Malik • Business man
               </div>
-            </div>
+            </motion.div>
           </div>
 
           <div className="lg:col-span-7 flex flex-col gap-6">
@@ -69,10 +84,15 @@ export default function TestimonialSection() {
             </blockquote>
             <div className="flex items-center gap-4 pt-2">
               <div className="flex items-center -space-x-3">
-                {avatars.map((a) => (
-                  <div
+                {avatars.map((a, i) => (
+                  <motion.div
                     key={a.src}
-                    className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-white shadow-sm"
+                    initial={{ opacity: 0, x: -12, scale: 0.8 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.4, type: "spring" }}
+                    whileHover={{ y: -4, zIndex: 10 }}
+                    className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-white shadow-sm relative"
                   >
                     <img
                       alt={a.alt}
@@ -80,12 +100,12 @@ export default function TestimonialSection() {
                       style={{ objectPosition: a.position }}
                       src={a.src}
                     />
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               <div>
                 <span className="text-sm font-bold text-charcoal block">
-                  Over 50,000+ Active Seekers
+                  Over <CountUp value="50,000+" /> Active Seekers
                 </span>
                 <span className="text-xs text-[#7A695E]">Connecting across 120+ countries</span>
               </div>

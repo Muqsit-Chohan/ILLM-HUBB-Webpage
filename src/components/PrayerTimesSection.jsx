@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
 
@@ -30,14 +31,30 @@ export default function PrayerTimesSection() {
         id="prayer-widget"
         className="w-full rounded-3xl bg-gradient-to-br from-[#7B5647] via-[#654639] to-[#432E22] p-6 sm:p-10 text-white shadow-[0_20px_50px_-12px_rgba(67,46,34,0.35)] border border-[#FED708]/30 relative overflow-hidden"
       >
-        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#FED708]/15 blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-[#FF863B]/20 blur-2xl pointer-events-none" />
-        <div className="absolute top-6 left-8 text-[#FED708] opacity-90 hidden sm:block drop-shadow-md">
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#FED708]/15 blur-2xl pointer-events-none"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-[#FF863B]/20 blur-2xl pointer-events-none"
+        />
+        <motion.div
+          animate={{ y: [0, -6, 0], rotate: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-6 left-8 text-[#FED708] opacity-90 hidden sm:block drop-shadow-md"
+        >
           <Icon name="bedtime" className="text-4xl" fill />
-        </div>
-        <div className="absolute top-8 right-10 text-[#FED708] opacity-90 hidden sm:block drop-shadow-md">
+        </motion.div>
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.9, 0.5, 0.9] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-8 right-10 text-[#FED708] opacity-90 hidden sm:block drop-shadow-md"
+        >
           <Icon name="star" className="text-3xl" fill />
-        </div>
+        </motion.div>
 
         <div className="flex flex-col items-center text-center gap-2 mb-8 relative z-10">
           <div className="flex items-center gap-2 text-lg sm:text-xl font-bold tracking-wide">
@@ -51,9 +68,14 @@ export default function PrayerTimesSection() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-4xl mx-auto relative z-10">
-          {prayerTimes.map((p) => (
-            <div
+          {prayerTimes.map((p, i) => (
+            <motion.div
               key={p.name}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
+              whileHover={{ scale: 1.04 }}
               className={
                 p.active
                   ? "flex items-center justify-between p-3.5 sm:p-4 rounded-full bg-white text-espresso-dark font-bold shadow-lg ring-2 ring-[#FED708] scale-105"
@@ -73,7 +95,7 @@ export default function PrayerTimesSection() {
               <span className={p.active ? "text-base font-extrabold text-[#9C4400]" : "text-base font-bold text-white"}>
                 {p.time}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Reveal>
@@ -85,7 +107,15 @@ export default function PrayerTimesSection() {
           className="lg:col-span-7 p-8 rounded-3xl bg-white border border-border-warm flex flex-col justify-between shadow-sm"
         >
           <div className="flex flex-col gap-3">
-            <Icon name="format_quote" className="text-3xl text-terracotta" fill />
+            <motion.span
+              initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="inline-block w-fit"
+            >
+              <Icon name="format_quote" className="text-3xl text-terracotta" fill />
+            </motion.span>
             <blockquote className="text-xl sm:text-2xl font-serif text-charcoal font-bold leading-relaxed">
               “The month of Ramadan in which was revealed the Quran, a guidance for mankind and
               clear proofs for guidance and the criterion.”

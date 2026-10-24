@@ -34,7 +34,6 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col text-left">
                 <span className="font-serif text-lg sm:text-xl font-bold tracking-[0.25em] text-[#3B281D] leading-none">ILLMHUBB</span>
-                <span className="font-arabic text-[11px] text-[#9C4400] font-bold leading-none mt-1" dir="rtl">عِلم وَحُبّ</span>
               </div>
             </Link>
           </div>
@@ -44,11 +43,18 @@ export default function Navbar() {
             {navLinks.map((link) => {
               const isActive = pathname === link.to;
               const className = isActive
-                ? "px-3.5 py-1 text-xs font-semibold text-[#9C4400] bg-white rounded-full shadow-sm transition-all"
-                : "px-3.5 py-1 text-xs font-medium text-[#6A5A50] hover:text-[#3B281D] hover:bg-white/60 rounded-full transition-all";
+                ? "relative px-3.5 py-1 text-xs font-semibold text-[#9C4400] rounded-full"
+                : "relative px-3.5 py-1 text-xs font-medium text-[#6A5A50] hover:text-[#3B281D] hover:bg-white/60 rounded-full transition-colors";
               return (
                 <Link key={link.label} to={link.to} className={className}>
-                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 bg-white rounded-full shadow-sm"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
                 </Link>
               );
             })}
@@ -56,20 +62,24 @@ export default function Navbar() {
 
           {/* Right: CTAs */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <a
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#FAF6F0] border border-border-warm text-[#3B281D] transition-all shadow-sm group"
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#FAF6F0] border border-border-warm text-[#3B281D] transition-colors shadow-sm group"
               href="#"
             >
               <Icon name="download" className="text-sm text-[#9C4400]" fill />
               <span className="text-xs font-semibold">Get App</span>
-            </a>
-            <a
-              className="inline-flex items-center gap-2 bg-[#3B281D] hover:bg-[#241710] text-[#FFF9F5] rounded-full px-4 sm:px-5 py-2 text-xs font-semibold shadow-md hover:shadow-lg transition-all border border-[#FED708]/30 group"
+            </motion.a>
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 bg-[#3B281D] hover:bg-[#241710] text-[#FFF9F5] rounded-full px-4 sm:px-5 py-2 text-xs font-semibold shadow-md hover:shadow-lg transition-colors border border-[#FED708]/30 group"
               href="#modules"
             >
               <span>Launch Web</span>
               <Icon name="arrow_forward" className="text-sm text-[#FED708] group-hover:translate-x-0.5 transition-transform" />
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>

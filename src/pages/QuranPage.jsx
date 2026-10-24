@@ -1,12 +1,15 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Icon from "../components/Icon";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import surahs from "../data/surahs";
 
+const PAGE_SIZE = 12;
+
 export default function QuranPage() {
   const [query, setQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -19,9 +22,16 @@ export default function QuranPage() {
     );
   }, [query]);
 
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [query]);
+
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
   return (
-    <main className="w-full pt-28 sm:pt-32 pb-20">
-      <div className="relative w-full overflow-hidden bg-[#fff8f7]">
+    <main className="w-full pb-20">
+      <div className="relative w-full overflow-hidden bg-[#fff8f7] pt-28 sm:pt-32">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-gradient-to-b from-[#FFB68F]/20 via-[#FFE16A]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
         <PageHero
@@ -47,10 +57,10 @@ export default function QuranPage() {
 
         <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <p className="text-xs text-[#7A695E] mb-4 font-body">
-            Showing {filtered.length} of {surahs.length} Surahs
+            Showing {visible.length} of {filtered.length} Surahs
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((s, i) => (
+            {visible.map((s, i) => (
               <Reveal
                 as="a"
                 href="#"
@@ -85,6 +95,20 @@ export default function QuranPage() {
           {filtered.length === 0 && (
             <div className="text-center py-16 text-[#7A695E] font-body">
               No Surah found matching "{query}"
+            </div>
+          )}
+
+          {hasMore && (
+            <div className="flex justify-center mt-8">
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#3B281D] hover:bg-black text-white font-medium text-sm shadow-md transition-colors"
+              >
+                <span>Load More Surahs</span>
+                <Icon name="expand_more" className="text-lg" />
+              </motion.button>
             </div>
           )}
         </section>

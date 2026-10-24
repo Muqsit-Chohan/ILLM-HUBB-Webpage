@@ -71,8 +71,8 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <main className="w-full pt-28 sm:pt-32 pb-20">
-      <div className="relative w-full overflow-hidden bg-[#fff8f7]">
+    <main className="w-full pb-20">
+      <div className="relative w-full overflow-hidden bg-[#fff8f7] pt-28 sm:pt-32">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-gradient-to-b from-[#FFB68F]/20 via-[#FFE16A]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
         {/* Header */}

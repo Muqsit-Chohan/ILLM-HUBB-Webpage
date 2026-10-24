@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
+import CountUp from "./CountUp";
 
 export default function PreciousSection() {
   return (
@@ -24,34 +26,56 @@ export default function PreciousSection() {
               and authenticated content crafted for your everyday spiritual mindfulness.
             </p>
             <div className="pt-2">
-              <a
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#3B281D] hover:bg-[#241710] text-[#FFF9F5] font-medium text-sm transition-all shadow-md hover:shadow-xl border border-[#FED708]/25"
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#3B281D] hover:bg-[#241710] text-[#FFF9F5] font-medium text-sm transition-colors shadow-md hover:shadow-xl border border-[#FED708]/25"
                 href="#modules"
               >
                 Discover All Features
-              </a>
+              </motion.a>
             </div>
           </div>
           <div className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-6 relative">
-            <div className="relative w-48 sm:w-56 h-64 sm:h-72 rounded-[120px_120px_28px_28px] overflow-hidden bg-sand shadow-lg border-2 border-white ring-1 ring-[#FED708]/30">
+            <motion.div
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 250, damping: 18 }}
+              className="relative w-48 sm:w-56 h-64 sm:h-72 rounded-[120px_120px_28px_28px] overflow-hidden bg-sand shadow-lg border-2 border-white ring-1 ring-[#FED708]/30 group"
+            >
               <img
                 alt="Men in traditional white thobe walking along the coast"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 src="/images/portrait-thobe.jpg"
               />
-              <div className="absolute -top-1 -right-1 text-[#FED708] p-2 drop-shadow-md">
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-1 -right-1 text-[#FED708] p-2 drop-shadow-md"
+              >
                 <Icon name="bedtime" className="text-2xl" fill />
-              </div>
-            </div>
-            <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-[#FED708] to-[#E8C27E] text-espresso-dark flex flex-col items-center justify-center text-center p-4 shadow-[0_12px_28px_-6px_rgba(254,215,8,0.35)] ring-4 ring-white">
+              </motion.div>
+            </motion.div>
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5, type: "spring" }}
+              className="w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-[#FED708] to-[#E8C27E] text-espresso-dark flex flex-col items-center justify-center text-center p-4 shadow-[0_12px_28px_-6px_rgba(254,215,8,0.35)] ring-4 ring-white"
+            >
               <span className="text-xs font-bold uppercase tracking-wider text-[#3B281D]/80">
                 Prayers Shared
               </span>
               <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#30211F]">
-                500,000+
+                <CountUp value="500,000+" />
               </span>
-              <Icon name="volunteer_activism" className="text-2xl mt-1 text-[#3B281D]" fill />
-            </div>
+              <motion.span
+                animate={{ scale: [1, 1.18, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Icon name="volunteer_activism" className="text-2xl mt-1 text-[#3B281D]" fill />
+              </motion.span>
+            </motion.div>
           </div>
         </div>
       </Reveal>
