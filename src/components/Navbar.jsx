@@ -27,7 +27,7 @@ export default function Navbar() {
             <Link className="flex items-center gap-2.5 group" to="/">
               <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-md border border-[#FED708]/30 group-hover:scale-105 transition-transform">
                 <img
-                  src="/images/logo-gold.png"
+                  src="/assets/logo.png"
                   alt="ILLMHUBB crest"
                   className="w-full h-full object-cover"
                 />

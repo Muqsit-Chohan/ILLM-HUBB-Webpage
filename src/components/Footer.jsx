@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-full overflow-hidden shadow-md shrink-0">
                 <img
-                  src="/images/logo-gold.png"
+                  src="/assets/logo.png"
                   alt="ILLMHUBB crest"
                   className="w-full h-full object-cover"
                 />
